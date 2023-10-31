@@ -55,6 +55,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun MainScreen(list: MutableList<Task>, modifier:Modifier = Modifier) {
     Column (
@@ -87,6 +88,12 @@ fun TextInputView(list: MutableList<Task>) {
 
       }
   }
+}
+
+@Composable
+fun DescList(list: List<Task>)
+{
+
 }
 
 @Composable
