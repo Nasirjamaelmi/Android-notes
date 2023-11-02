@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.sharp.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -56,7 +57,6 @@ fun Overview(navController: NavController, list: MutableList<Note>, modifier: Mo
 }
 
 
-
 @Composable
 fun RowView(navController: NavController, note: Note , list: MutableList<Note>) {
     Row(
@@ -74,8 +74,8 @@ fun RowView(navController: NavController, note: Note , list: MutableList<Note>) 
 
             }
         )
-
-        Text(note.title)
+        Text(note.title, modifier= Modifier
+            .weight(1f))
         Spacer(modifier = Modifier.width(5.dp))
         if(note.isChecked.value){
           FloatingActionButton(onClick = {list.remove(note)})

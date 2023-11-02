@@ -57,8 +57,8 @@ import java.util.UUID
 
 data class Note(
     val id: String = UUID.randomUUID().toString(),
-    val title: String,
-    val desc: String,
+    var title: String,
+    var desc: String,
     var isChecked: MutableState<Boolean> = mutableStateOf(false)
 )
 

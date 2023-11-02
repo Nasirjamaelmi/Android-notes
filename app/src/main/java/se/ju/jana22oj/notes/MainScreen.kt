@@ -17,10 +17,9 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-
-
 
 @Composable
 fun TextInputView(navController: NavController, list: MutableList<Note>)
@@ -30,6 +29,9 @@ fun TextInputView(navController: NavController, list: MutableList<Note>)
     }
     var desc by rememberSaveable {
         mutableStateOf("")
+    }
+    var ShowError by rememberSaveable {
+        mutableStateOf(false)
     }
     Column (
         modifier = Modifier.fillMaxWidth(),
@@ -45,16 +47,24 @@ fun TextInputView(navController: NavController, list: MutableList<Note>)
             placeholder = {Text("Enter Desc")},
             modifier = Modifier.fillMaxWidth())
         Button(onClick = {
-            list.add(Note(title = title, desc = desc))
-            title = ""
-            desc = ""
-            navController.navigateUp()
-
+            if(title.length in 3..50 && desc.length <= 120) {
+                list.add(Note(title = title, desc = desc))
+                title = ""
+                desc = ""
+                navController.navigateUp()
+            }
+            else{
+               ShowError = true
+            }
         }) {
             Text("Add Note")
+
+        }
+        if(ShowError)
+        {
+            Text("Invalid: Change title or text", color = Color.Red)
         }
     }
-
 }
 
 
