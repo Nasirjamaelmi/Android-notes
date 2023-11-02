@@ -96,7 +96,23 @@ class MainActivity : ComponentActivity() {
                             val id = entry.arguments?.getString("id")
                             val note: Note? = list.find { it.id == id }
                             if(note != null)
-                                DetailScreen(note = note)
+                                DetailScreen(navController,note)
+                        }
+                        composable(
+                            route = Screen.EditScreen.route + "/{id}",
+                            arguments = listOf(
+                                navArgument("id")
+                                {
+                                    type = NavType.StringType
+                                    nullable = false
+                                }
+                            )
+                        )
+                        {entry ->
+                            val id = entry.arguments?.getString("id")
+                            val note: Note? = list.find { it.id == id }
+                            if(note != null)
+                                Edit(navController, list, note)
                         }
                     }
                 }
